@@ -1,6 +1,4 @@
 "use client";
-
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -9,9 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import {
-  Gift,
   Users,
   Calculator,
   QrCode,
@@ -21,7 +17,6 @@ import {
   CheckCircle,
   ArrowRight,
   Banknote,
-  Star,
 } from "lucide-react";
 
 interface LandingPageProps {
@@ -137,7 +132,7 @@ export function LandingPage({ onGetStarted }: LandingPageProps) {
               Everything You Need for Duit Raya Management
             </h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              From tracking recipients to generating QR codes, we've got all the
+              From tracking recipients to generating QR codes, we&apos;ve got all the
               tools you need to make your Hari Raya celebration organized and
               memorable.
             </p>

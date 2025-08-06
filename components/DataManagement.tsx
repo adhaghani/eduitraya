@@ -11,10 +11,8 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Badge } from "@/components/ui/badge";
 import { ConfirmDialog } from "@/components/ui/confirm-dialog";
 import { useRecipients } from "@/hooks/useRecipients";
-import { Recipient } from "@/lib/types";
 import {
   Download,
   Upload,
@@ -25,12 +23,13 @@ import {
   FileJson,
 } from "lucide-react";
 import { toast } from "sonner";
+import { Recipient } from "@/lib/types";
 
 export function DataManagement() {
   const { recipients, clearAllRecipients } = useRecipients();
   const [isBackingUp, setIsBackingUp] = useState(false);
   const [isRestoring, setIsRestoring] = useState(false);
-  const [restoreData, setRestoreData] = useState<any>(null);
+  const [restoreData, setRestoreData] = useState<Recipient[] | null>(null);
   const [restoreDialogOpen, setRestoreDialogOpen] = useState(false);
 
   const handleBackup = () => {
@@ -64,6 +63,7 @@ export function DataManagement() {
         description: "Your data has been downloaded as a JSON file.",
       });
     } catch (error) {
+      console.error("Backup error:", error);
       toast.error("Failed to create backup");
     } finally {
       setIsBackingUp(false);
@@ -89,12 +89,13 @@ export function DataManagement() {
 
         // Validate each recipient
         const validRecipients = backupData.recipients.filter(
-          (recipient: any) => {
+          (recipient: unknown): recipient is Recipient => {
+            const r = recipient as Record<string, unknown>;
             return (
-              recipient.id &&
-              recipient.name &&
-              typeof recipient.amount === "number" &&
-              recipient.note
+              typeof r.id === "string" &&
+              typeof r.name === "string" &&
+              typeof r.amount === "number" &&
+              typeof r.note === "string"
             );
           }
         );
@@ -148,6 +149,7 @@ export function DataManagement() {
 
       toast.success(`Successfully restored ${restoreData.length} recipients!`);
     } catch (error) {
+      console.error("Restore error:", error);
       toast.error("Failed to restore data");
     } finally {
       setRestoreData(null);

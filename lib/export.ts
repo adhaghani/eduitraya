@@ -84,7 +84,7 @@ export const exportUtils = {
 
     // Table content
     pdf.setFont("helvetica", "normal");
-    recipients.forEach((recipient, index) => {
+    recipients.forEach((recipient) => {
       // Check if we need a new page
       if (yPosition > 270) {
         pdf.addPage();

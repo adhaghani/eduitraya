@@ -27,7 +27,6 @@ import {
   DollarSign,
   Plus,
   List,
-  Download,
   Calculator,
   Gift,
 } from "lucide-react";

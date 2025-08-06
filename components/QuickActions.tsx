@@ -48,6 +48,7 @@ export function QuickActions({ onAddRecipient }: QuickActionsProps) {
       });
     } catch (error) {
       toast.error("Failed to add recipient");
+      console.error("Quick add error:", error);
     }
   };
 
@@ -76,6 +77,7 @@ export function QuickActions({ onAddRecipient }: QuickActionsProps) {
       );
     } catch (error) {
       toast.error("Failed to add bulk recipients");
+      console.error("Bulk add error:", error);
     } finally {
       setIsAdding(false);
     }
