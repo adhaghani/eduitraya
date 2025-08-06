@@ -69,9 +69,11 @@ export function QuickActions({ onAddRecipient }: QuickActionsProps) {
 
       await Promise.all(promises);
 
-      toast.success(`Successfully added ${bulkCount} recipients`, {
-        description: `Total amount: RM ${(bulkAmount * bulkCount).toFixed(2)}`,
-      });
+      toast.success(
+        `Successfully added ${bulkCount} recipients for RM ${(
+          bulkAmount * bulkCount
+        ).toFixed(2)}`
+      );
     } catch (error) {
       toast.error("Failed to add bulk recipients");
     } finally {
